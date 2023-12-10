@@ -1,6 +1,6 @@
 
 # Stepper Control
-This code implements the control of a motor for use in robotics projects. The type of motor used here is a hybrid bipolar stepper motor - it allows precise movement, holding torque, and continuous motion.However, stepper motors are more difficult to control than regular DC motors. Furthermore, a bipolar stepper is more difficult to control, and also more powerful, than other stepper motor types. This project is written in Arduino
+This code implements the control of a motor for use in robotics projects. The type of motor used here is a hybrid bipolar stepper motor - it allows precise movement, holding torque, and continuous motion.However, stepper motors are more difficult to control than regular DC motors and even unipolar stepper motors. Bipolar steppers are among the most powerful and repeatable motor types. This repository acts as a study of bipolar stepper motors, and how to control them.
 
 &nbsp;
 
@@ -30,6 +30,9 @@ To make a bipolar motor spin:
  - Then power the first coil with reverse polarity.
  - Finally, power the second coil.
 To reverse the motor direction of a bipolar stepper, simply reverse the polarity of the second coil.
+
+## Half stepping
+
 
 &nbsp;
 
