@@ -9,7 +9,7 @@ This code implements the control of a motor for use in robotics projects. The ty
 &nbsp;
 
 ## Hardware
-- `Arduino R4`: the microcontroller that the code runs on
+- `Arduino R4`: the microcontroller that the code runs on 
 - `Arduino motor carrier Rev3`: acts as the driver, delivers more power than the Arduino is capable of.
 - `NEMA 17 hybrid bipolar stepper`: 1.8° Step Angle, 42.48 oz-in Holding Torque
 - `9 volt battery`: The motor is powered by a 9 volt battery
@@ -24,7 +24,7 @@ The motor has two pairs of wires corresponding with two coils, often noted as A 
 &nbsp;
 
 ## Full stepping 
-To make a bipolar motor spin: 
+To make a bipolar motor complete one full step:
  - Power the first coil.
  - Next power the second coil with reverse polarity.
  - Then power the first coil with reverse polarity.
@@ -32,6 +32,10 @@ To make a bipolar motor spin:
 To reverse the motor direction of a bipolar stepper, simply reverse the polarity of the second coil.
 
 ## Half stepping
+Full stepping uses the full power of each coil, while half stepping uses partial activation to cut the repeatable steps from 1.8 degrees to 0.9 degrees. In the process, holding torque is sacrificed. 
+
+To make a bipolar motor complete a half step:
+
 
 
 &nbsp;
