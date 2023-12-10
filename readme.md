@@ -4,6 +4,10 @@ This code implements the control of a motor for use in robotics projects. The ty
 
 &nbsp;
 
+<div align="center"><img src="docs/preview.gif" width="800"></div>
+
+&nbsp;
+
 ## Hardware
 - `Arduino R4`: the microcontroller that the code runs on
 - `Arduino motor carrier Rev3`: acts as the driver, delivers more power than the Arduino is capable of.
@@ -26,10 +30,6 @@ To make a bipolar motor spin:
  - Then power the first coil with reverse polarity.
  - Finally, power the second coil.
 To reverse the motor direction of a bipolar stepper, simply reverse the polarity of the second coil.
-
-&nbsp;
-
-<div align="center"><img src="docs/preview.gif" width="800"></div>
 
 &nbsp;
 
