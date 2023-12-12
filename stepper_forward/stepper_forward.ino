@@ -192,5 +192,14 @@ void quarterStep(){
   // 7. -B
   // 8. A -B with A at half current
   // Repeat sequence
+
+  // discrepency between using half current or 0.71 or 1/(2)^.5
+  // explanation: the vector sum of the currents in both coils provides the same magnitude of torque as a single coil at full activation
+}
+
+void sinusoidalStep(){
+  // computationally more expensive with diminishing returns compared to a microstep level of say 128th or even 64th
+  //Ia = Imax * cos(theta)
+  //Ib = Imax * sin(theta)
 }
 
