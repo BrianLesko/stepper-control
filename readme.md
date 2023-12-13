@@ -28,6 +28,7 @@ The motor has two pairs of wires corresponding with two coils, often noted as A 
 # Control methods
 hybrid bipolar stepper can be controlled in multiple ways
 
+&nbsp;
 
 ## Single phase stepping
 Single phase stepping is the simplest way to control a stepper motor, but despite its relative simplictiy, it still takes a set of four precicesly timed signals to complete a motor step.
@@ -41,9 +42,13 @@ To make a bipolar motor complete one full step:
  - Finally, power the second coil.
 To reverse the motor direction of a bipolar stepper, simply reverse the polarity of the second coil.
 
+&nbsp;
+
 ## Full stepping 
 Full stepping provdes the highest torque when controlling a stepper motor because it utilizes simultaneous coil activations - which results in a greater magnetic field and thus a greater attraction force. However, full stepping is more complicated to implement than single phase stepping. Additionally, full stepping produces more vibration than partial stepping. 
 The activation pattern for one full step is (A+B+ > A-B+ > A-B- > A+B-).
+
+&nbsp;
 
 ## Half stepping
 Full stepping uses the full power of each coil, while half stepping uses partial activation to cut the repeatable steps from 1.8 degrees to 0.9 degrees. In the process, holding torque is sacrificed. 
@@ -51,8 +56,10 @@ Full stepping uses the full power of each coil, while half stepping uses partial
 Half stepping, a type of partial or micro stepping, creates less vibration and results in smoother motion than full stepping. However, when half stepping the torque is lower than full stepping and additionally the algorithm is twice as long as full stepping.
 The coil activation pattern for a half step is (AB > B > A-B+ > A- > A-B- > B- > A+B- > A).
 
+&nbsp;
+
 ## Quarter stepping
-Quarter stepping, and every 
+Quarter stepping, and every further incrementation is called partial stepping or microstepping. With further microstepping, the control algorithm doubles in length, occupying the microcontroller's brain with further instructions. Hence, creating a difficulting in further smoothing motion of stepper motors. 
 
 &nbsp;
 
