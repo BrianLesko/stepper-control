@@ -59,12 +59,22 @@ The coil activation pattern for a half step is (AB > B > A-B+ > A- > A-B- > B- >
 &nbsp;
 
 ## Quarter stepping
-Quarter stepping, and every further incrementation is called partial stepping or microstepping. With further microstepping, the control algorithm doubles in length, occupying the microcontroller's brain with further instructions. Hence, creating a difficulting in further smoothing motion of stepper motors. 
+Quarter stepping, and every further incrementation is called partial stepping or microstepping. With further microstepping, the control algorithm doubles in length, occupying the microcontroller's brain with further instructions and providing diminishing returns in reducing vibrations. 
+
+&nbsp;
+
+## Sinusoidal stepping
+Sinusoidal stepping takes microstepping to the extreme. The currents constantly change according to sinusoidal waves.
+Using sinusoidal stepping: 
+- The current in channel A: Ia = Imax * cos(theta)
+- The current in channel B: Ib = Imax * sin(theta)
+In practice, this method generates the smoothest possible motion but requires hardware capable of generating continuous varrying current, which is much more expensive than some level of microstepping, which can use a purely digital system rather than an analog one.
 
 &nbsp;
 
 ## Sources
 [Randofo / instructables.com](https://www.instructables.com/Arduino-Motor-Shield-Tutorial/)
+[Monolithic Power Systems](https://www.monolithicpower.com/bipolar-stepper-motors-part-ii-microstepping-and-decay-modes)
 
 &nbsp;
 
