@@ -1,7 +1,9 @@
 // Brian Lesko, 12/12/23, Control a bipolar hybrid stepper motor
+
 // A stepper motor can rotate continuously, acheive accurate and repeatable increments, and does not require a feedback loop
 // A Bipolar Hybrid stepper is what is used in this code. It has two coils, A and B, each with its own pair of wires
 // A bipolar hybrid stepper can be controlled in various ways
+
 // Single phase stepping is the simplest way to control a stepper motor.
 // Despite its relative simplictiy, it still takes a set of four precicesly timed signals to complete a motor step
 // The phases are A+ B+ A- B-

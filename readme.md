@@ -1,6 +1,8 @@
 
 # Stepper Control
-This code implements the control of a motor for use in robotics projects. The type of motor used here is a hybrid bipolar stepper motor - it allows precise movement, holding torque, and continuous motion.However, stepper motors are more difficult to control than regular DC motors and even unipolar stepper motors. Bipolar steppers are among the most powerful and repeatable motor types. This repository acts as a study of bipolar stepper motors, and how to control them.
+This code implements the control of a motor for use in robotics projects. The chosen motor type is a hybrid bipolar stepper motor - it acheives accurate and repeatable movement, yields a high holding torque, allows continuous motion, and lacks the requirement of a feedback loop.
+
+Bipolar steppers are among the most powerful and repeatable motor types. However, bipolar stepper motors are more difficult to control than other steppers and much more difficult to control than DC motors. This repository acts as a study of bipolar stepper motors, and how to control them.
 
 &nbsp;
 
@@ -17,13 +19,21 @@ This code implements the control of a motor for use in robotics projects. The ty
 &nbsp;
 
 ## Motor Specs
-The NEMA motor used here has 200 steps per revolution - allowing movement of 1.8 degree increments when using maximal torque. Partial stepping can be implemented for smaller movements, but at the cost of less torque. 
+The NEMA motor used here has 200 steps per revolution which results in a step size of 1.8 degrees. Finer step resolutions are acheivable when **microstepping**, but at the cost of lowering torque. 
 
-The motor has two pairs of wires corresponding with two coils, often noted as A and B. To full step, the coils should be activated in phase with alternating polarity.
+The motor has two pairs of wires corresponding with two coils, often noted as A and B.
 
 &nbsp;
 
-## Full stepping 
+# Control methods
+hybrid bipolar stepper can be controlled in multiple ways
+
+
+## Single phase stepping
+Single phase stepping is the simplest way to control a stepper motor, but despite its relative simplictiy, it still takes a set of four precicesly timed signals to complete a motor step.
+The activation pattern for a single phase step is (A+ > B+ > A- > B-) ; where the sign notes the current direction. 
+
+In other words:
 To make a bipolar motor complete one full step:
  - Power the first coil.
  - Next power the second coil with reverse polarity.
@@ -31,12 +41,18 @@ To make a bipolar motor complete one full step:
  - Finally, power the second coil.
 To reverse the motor direction of a bipolar stepper, simply reverse the polarity of the second coil.
 
+## Full stepping 
+Full stepping provdes the highest torque when controlling a stepper motor because it utilizes simultaneous coil activations - which results in a greater magnetic field and thus a greater attraction force. However, full stepping is more complicated to implement than single phase stepping. Additionally, full stepping produces more vibration than partial stepping. 
+The activation pattern for one full step is (A+B+ > A-B+ > A-B- > A+B-).
+
 ## Half stepping
 Full stepping uses the full power of each coil, while half stepping uses partial activation to cut the repeatable steps from 1.8 degrees to 0.9 degrees. In the process, holding torque is sacrificed. 
 
-To make a bipolar motor complete a half step:
+Half stepping, a type of partial or micro stepping, creates less vibration and results in smoother motion than full stepping. However, when half stepping the torque is lower than full stepping and additionally the algorithm is twice as long as full stepping.
+The coil activation pattern for a half step is (AB > B > A-B+ > A- > A-B- > B- > A+B- > A).
 
-
+## Quarter stepping
+Quarter stepping, and every 
 
 &nbsp;
 
