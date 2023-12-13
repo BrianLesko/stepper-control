@@ -80,8 +80,12 @@ In practice, this method generates the smoothest possible motion but requires ha
 ## Repository Structure
 ```
 repository/
-├── stepper_forward/
-│   └── stepper_forward.ino
+├── single-phase-stepping/
+│   └── single-phase-stepping.ino
+├── full-stepping/
+│   └── full-stepping.ino
+├── half-stepping/
+│   └── half-stepping.ino
 └── docs/
     └── preview.png # preview photo for Github
 ```
