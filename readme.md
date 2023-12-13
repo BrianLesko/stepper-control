@@ -26,7 +26,6 @@ The motor has two pairs of wires corresponding with two coils, often noted as A 
 &nbsp;
 
 # Control methods
-hybrid bipolar stepper can be controlled in multiple ways
 
 &nbsp;
 
