@@ -1,7 +1,6 @@
 // Brian Lesko, 12/12/23, Control a bipolar hybrid stepper motor
 // Partial stepping yeilds lower vibration and smoother movement than full stepping.
 
-
 int delayLength = 1;
 
 void setup() {
@@ -29,72 +28,60 @@ void halfStep(int delayLength, int steps, bool backwards, int startAt) {
     digitalWrite(9, LOW);  //ENABLE CH A
     digitalWrite(8, LOW); //ENABLE CH B
   
-    // AB
-    if (i>0) | (startAt == 0) {
+    if (i>0) | (startAt == 0) {    // AB
       digitalWrite(12, HIGH);   //Sets direction of CH A as +
       digitalWrite(13, HIGH);   //Sets direction of CH B as + 
       analogWrite(3, 255);   //Moves CH A
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
 
-    // B 
-    if (i>0) | (startAt == 1) { 
+    if (i>0) | (startAt == 1) {     // B 
       digitalWrite(9, HIGH);  //DISABLE CH A
       digitalWrite(8, LOW); //ENABLE CH B
       digitalWrite(13, HIGH);   //Sets direction of CH B
       if (backwards){digitalWrite(13, LOW);}
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
 
-    //A-B
-    if (i>0) | (startAt == 2) {
+    if (i>0) | (startAt == 2) {    //A-B
       digitalWrite(9, LOW);  //ENABLE CH A
       digitalWrite(12, LOW);   //Sets direction of CH A as -
       digitalWrite(13, HIGH);   //Sets direction of CH B as + 
       analogWrite(3, 255);   //Moves CH A
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
 
-    // A-
-    if (i>0) | (startAt == 3) {
+    if (i>0) | (startAt == 3) {    // A-
       digitalWrite(9, LOW);  //ENABLE CH A
       digitalWrite(8, HIGH); //DISABLE CH B
       digitalWrite(12, LOW);   //Sets direction of CH A
       analogWrite(3, 255);   //Moves CH A
-
       delay(delayLength);
       i++;
     }
 
-    //A-B-
-    if (i>0) | (startAt == 4) {
+    if (i>0) | (startAt == 4) {    //A-B-
       digitalWrite(9, LOW);  //ENABLE CH A
       digitalWrite(12, LOW);   //Sets direction of CH A as -
       digitalWrite(13, LOW);   //Sets direction of CH B as - 
       analogWrite(3, 255);   //Moves CH A
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
 
-    // B-
-    if (i>0) | (startAt == 5) {
+    if (i>0) | (startAt == 5) {     // B-
       digitalWrite(9, HIGH);  //DISABLE CH A
       digitalWrite(8, LOW); //ENABLE CH B
       digitalWrite(13, LOW);   //Sets direction of CH B
       if (backwards){digitalWrite(13, HIGH);}
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
@@ -105,7 +92,6 @@ void halfStep(int delayLength, int steps, bool backwards, int startAt) {
       digitalWrite(13, LOW);   //Sets direction of CH B as - 
       analogWrite(3, 255);   //Moves CH A
       analogWrite(11, 255);   //Moves CH B
-
       delay(delayLength);
       i++;
     }
@@ -115,7 +101,6 @@ void halfStep(int delayLength, int steps, bool backwards, int startAt) {
       digitalWrite(8, HIGH); //DISABLE CH B
       digitalWrite(12, HIGH);   //Sets direction of CH A
       analogWrite(3, 255);   //Moves CH A
-
       delay(delayLength);
       i++;
     }
