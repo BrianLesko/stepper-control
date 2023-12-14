@@ -55,15 +55,15 @@ Full stepping uses the full power of each coil, while half stepping uses partial
 Half stepping, a type of partial or micro stepping, creates less vibration and results in smoother motion than full stepping. However, when half stepping the torque is lower than full stepping and additionally the algorithm is twice as long as full stepping.
 The coil activation pattern for a half step is (AB > B > A-B+ > A- > A-B- > B- > A+B- > A).
 
-&nbsp;
-
-## Quarter stepping
-Quarter stepping, and every further incrementation is called partial stepping or microstepping. With further microstepping, the control algorithm doubles in length, occupying the microcontroller's brain with further instructions and providing diminishing returns in reducing vibrations. 
+The half stepping code in this repo is much quiter than full stepping
 
 &nbsp;
+
+## Further microstepping
+Microstepping in smaller increments should improve performance but requires geometrically increasing control signals from the arduino. In other words, the number of control signals needed doubles each increase in microstepping, but the reduction in noise is not necessarily halved. This is likely because of the imperfect relationship between delivered and demanded current in the coils - due to back EMF inductance and in general the principles of electromagnetism and noise. See [Analog devices](https://www.analog.com/en/products/landing-pages/001/secret-silent-stepper-motor-control.html).
 
 ## Sinusoidal stepping
-Sinusoidal stepping takes microstepping to the extreme. The currents constantly change according to sinusoidal waves.
+Sinusoidal stepping takes microstepping to the extreme. This requires a purely analog signal and results in coil currents constantly flowing according to sinusoidal waves.
 Using sinusoidal stepping: 
 - The current in channel A: Ia = Imax * cos(theta)
 - The current in channel B: Ib = Imax * sin(theta)
@@ -74,6 +74,7 @@ In practice, this method generates the smoothest possible motion but requires ha
 ## Sources
 [Randofo / instructables.com](https://www.instructables.com/Arduino-Motor-Shield-Tutorial/)
 [Monolithic Power Systems](https://www.monolithicpower.com/bipolar-stepper-motors-part-ii-microstepping-and-decay-modes)
+[Analog devices](https://www.analog.com/en/products/landing-pages/001/secret-silent-stepper-motor-control.html)
 
 &nbsp;
 
