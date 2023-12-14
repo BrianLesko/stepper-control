@@ -11,7 +11,7 @@
 
 // Finer movement yet can also be implemented in quarter stepping, eigth stepping and so on - often times partial stepping is called microstepping
 
-int delayLength = 2;
+int delayLength = 1;
 
 void setup() {
   //motor direction toggle pins
@@ -22,85 +22,99 @@ void setup() {
 }
 
 void loop(){
-  halfStep(delayLength, false); // Forward step
+  state = halfStep(delayLength, 200, false); 
+  while (true){} // Stop
 }
 
-void halfStep(int delayLength, bool backwards) {
+void halfStep(int delayLength, int steps, bool backwards) {
   // AB > B > A-B+ > A- > A-B- > B- > A+B- > A
   // half stepping has maximum torque on double activations but less torque on single activation steps, it is much smoother and quieter
   // Source: https://www.monolithicpower.com/bipolar-stepper-motors-part-i-control-modes#:~:text=In%20half%2Dstep%20mode%2C%20both,phase%20to%20two%2Dphase%20operation.
 
-  delayLength = delayLength/2;
+  int n = 8
+  int i = 0;
+  while (i < steps) {
 
-  digitalWrite(9, LOW);  //ENABLE CH A
-  digitalWrite(8, LOW); //ENABLE CH B
+    digitalWrite(9, LOW);  //ENABLE CH A
+    digitalWrite(8, LOW); //ENABLE CH B
+  
+    // AB
+    digitalWrite(12, HIGH);   //Sets direction of CH A as +
+    digitalWrite(13, HIGH);   //Sets direction of CH B as + 
+    analogWrite(3, 255);   //Moves CH A
+    analogWrite(11, 255);   //Moves CH B
 
-  // AB
-  digitalWrite(12, HIGH);   //Sets direction of CH A as +
-  digitalWrite(13, HIGH);   //Sets direction of CH B as + 
-  analogWrite(3, 255);   //Moves CH A
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    // B 
+    digitalWrite(9, HIGH);  //DISABLE CH A
+    digitalWrite(8, LOW); //ENABLE CH B
+    digitalWrite(13, HIGH);   //Sets direction of CH B
+    if (backwards){digitalWrite(13, LOW);}
+    analogWrite(11, 255);   //Moves CH B
 
-  // B 
-  digitalWrite(9, HIGH);  //DISABLE CH A
-  digitalWrite(8, LOW); //ENABLE CH B
-  digitalWrite(13, HIGH);   //Sets direction of CH B
-  if (backwards){digitalWrite(13, LOW);}
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    //A-B
+    digitalWrite(9, LOW);  //ENABLE CH A
+    digitalWrite(12, LOW);   //Sets direction of CH A as -
+    digitalWrite(13, HIGH);   //Sets direction of CH B as + 
+    analogWrite(3, 255);   //Moves CH A
+    analogWrite(11, 255);   //Moves CH B
 
-  //A-B
-  digitalWrite(9, LOW);  //ENABLE CH A
-  digitalWrite(12, LOW);   //Sets direction of CH A as -
-  digitalWrite(13, HIGH);   //Sets direction of CH B as + 
-  analogWrite(3, 255);   //Moves CH A
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    // A-
+    digitalWrite(9, LOW);  //ENABLE CH A
+    digitalWrite(8, HIGH); //DISABLE CH B
+    digitalWrite(12, LOW);   //Sets direction of CH A
+    analogWrite(3, 255);   //Moves CH A
 
-  // A-
-  digitalWrite(9, LOW);  //ENABLE CH A
-  digitalWrite(8, HIGH); //DISABLE CH B
-  digitalWrite(12, LOW);   //Sets direction of CH A
-  analogWrite(3, 255);   //Moves CH A
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    //A-B-
+    digitalWrite(8, LOW);  //ENABLE CH B
+    digitalWrite(12, LOW);   //Sets direction of CH A as -
+    digitalWrite(13, LOW);   //Sets direction of CH B as -
+    analogWrite(3, 255);   //Moves CH A
+    analogWrite(11, 255);   //Moves CH B
 
-  //A-B-
-  digitalWrite(8, LOW);  //ENABLE CH B
-  digitalWrite(12, LOW);   //Sets direction of CH A as -
-  digitalWrite(13, LOW);   //Sets direction of CH B as -
-  analogWrite(3, 255);   //Moves CH A
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    // B-
+    digitalWrite(9, HIGH);  //DISABLE CH A
+    digitalWrite(8, LOW); //ENABLE CH B
+    digitalWrite(13, LOW);   //Sets direction of CH B
+    if (backwards){digitalWrite(13, HIGH);}
+    analogWrite(11, 255);   //Moves CH B
 
-  // B-
-  digitalWrite(9, HIGH);  //DISABLE CH A
-  digitalWrite(8, LOW); //ENABLE CH B
-  digitalWrite(13, LOW);   //Sets direction of CH B
-  if (backwards){digitalWrite(13, HIGH);}
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    // AB-
+    digitalWrite(9, LOW);  //ENABLE CH A  
+    digitalWrite(12, HIGH);   //Sets direction of CH A as +
+    digitalWrite(13, LOW);   //Sets direction of CH B as -
+    analogWrite(3, 255);   //Moves CH A
+    analogWrite(11, 255);   //Moves CH B
 
-  // AB-
-  digitalWrite(9, LOW);  //ENABLE CH A  
-  digitalWrite(12, HIGH);   //Sets direction of CH A as +
-  digitalWrite(13, LOW);   //Sets direction of CH B as -
-  analogWrite(3, 255);   //Moves CH A
-  analogWrite(11, 255);   //Moves CH B
+    delay(delayLength);
+    i++;
 
-  delay(delayLength);
+    // A 
+    digitalWrite(9, LOW);  //ENABLE CH A
+    digitalWrite(8, HIGH); //DISABLE CH B
+    digitalWrite(12, HIGH);   //Sets direction of CH A
+    analogWrite(3, 255);   //Moves CH A
 
-  // A 
-  digitalWrite(9, LOW);  //ENABLE CH A
-  digitalWrite(8, HIGH); //DISABLE CH B
-  digitalWrite(12, HIGH);   //Sets direction of CH A
-  analogWrite(3, 255);   //Moves CH A
-
-  delay(delayLength);
+    delay(delayLength);
+    i++;
+  }
+  state = n%i;
+  return state;
 }
